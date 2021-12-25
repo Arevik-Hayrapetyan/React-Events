@@ -7,7 +7,7 @@ export default function NavBar() {
       <Container>
         <Menu.Item header>
           <img src="assets/logo.png" alt="logo" />
-          Re-vents
+          Blog
         </Menu.Item>
         <Menu.Item name="Events" />
         <Menu.Item>
