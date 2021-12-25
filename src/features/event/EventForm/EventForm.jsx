@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 
-export default function EventForm() {
+export default function EventForm({ cancelIsOpenForm }) {
   return (
     <Segment>
       <Form>
@@ -27,6 +27,9 @@ export default function EventForm() {
         </Form.Field>
         <Button positive type="submit">
           Submit
+        </Button>
+        <Button onClick={cancelIsOpenForm} type="button">
+          Cancel
         </Button>
       </Form>
     </Segment>

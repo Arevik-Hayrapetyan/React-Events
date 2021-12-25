@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Grid } from "semantic-ui-react";
 import EventForm from "../EventForm/EventForm";
 import EventList from "../EventList/EventList";
+import { useState } from "react";
 
 const events = [
   {
@@ -55,15 +56,25 @@ const events = [
 ];
 
 export default function EventDashboard() {
+  const [state, setState] = useState(events);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleIsOpenToggle = (event) => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div>
       <Grid>
         <Grid.Column width={10}>
-          <EventList events={events} />
+          <EventList events={state} />
         </Grid.Column>
         <Grid.Column width={6}>
-          <Button positive content="Create Event" />
-          <EventForm />
+          <Button
+            onClick={handleIsOpenToggle}
+            positive
+            content="Create Event"
+          />
+          {isOpen && <EventForm cancelIsOpenForm={handleIsOpenToggle} />}
         </Grid.Column>
       </Grid>
     </div>
