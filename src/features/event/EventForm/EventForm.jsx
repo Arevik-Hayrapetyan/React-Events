@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { useState } from "react";
 
-export default function EventForm({ cancelIsOpenForm }) {
+export default function EventForm({ cancelIsOpenForm, createEvent }) {
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
   const [city, setCity] = useState();
@@ -11,6 +11,15 @@ export default function EventForm({ cancelIsOpenForm }) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    let state = {
+      title: title,
+      date: date,
+      city: city,
+      venue: venue,
+      hostedBy: hostedBy,
+    };
+    state.barev = "hi";
+    createEvent(state);
   };
 
   const handleTitleChange = (event) => {

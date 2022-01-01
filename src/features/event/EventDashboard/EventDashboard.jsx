@@ -68,6 +68,7 @@ export default function EventDashboard() {
     newEvent.id = cuid();
     newEvent.hostPhotoURL = "/assets/user.png";
     setState([...state, newEvent]);
+    setIsOpen(false);
   };
 
   return (
