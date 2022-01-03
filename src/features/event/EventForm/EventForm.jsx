@@ -18,7 +18,6 @@ export default function EventForm({ cancelIsOpenForm, createEvent }) {
       venue: venue,
       hostedBy: hostedBy,
     };
-    state.barev = "hi";
     createEvent(state);
   };
 

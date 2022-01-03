@@ -59,9 +59,18 @@ const events = [
 export default function EventDashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState(events);
+  const [selectedEvent, setSelectEvent] = useState(null);
 
-  const handleIsOpenToggle = (event) => {
-    setIsOpen(!isOpen);
+  // const handleIsOpenToggle = (event) => {
+  //   setIsOpen(!isOpen);
+  // };
+
+  const handleCreateFormOpen = () => {
+    setIsOpen(true);
+    setSelectEvent(null);
+  };
+  const handleFormCancel = () => {
+    setIsOpen(false);
   };
 
   const handleCreateEvent = (newEvent) => {
@@ -71,22 +80,30 @@ export default function EventDashboard() {
     setIsOpen(false);
   };
 
+  const handleSelectEvent = (evt, event) => {
+    setSelectEvent(event);
+    setIsOpen(true);
+    console.log(evt);
+    console.log(event);
+  };
+
   return (
     <div>
       <Grid>
         <Grid.Column width={10}>
-          <EventList events={state} />
+          <EventList events={state} selectEvent={handleSelectEvent} />
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
-            onClick={handleIsOpenToggle}
+            onClick={handleCreateFormOpen}
             positive
             content="Create Event"
           />
           {isOpen && (
             <EventForm
               createEvent={handleCreateEvent}
-              cancelIsOpenForm={handleIsOpenToggle}
+              cancelIsOpenForm={handleFormCancel}
+              selectedEvent={selectedEvent}
             />
           )}
         </Grid.Column>
