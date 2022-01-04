@@ -1,41 +1,31 @@
 import React from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function EventForm({ cancelIsOpenForm, createEvent }) {
-  const [title, setTitle] = useState();
-  const [date, setDate] = useState();
-  const [city, setCity] = useState();
-  const [venue, setVenue] = useState();
-  const [hostedBy, setHostedBy] = useState();
+export default function EventForm({
+  cancelIsOpenForm,
+  createEvent,
+  selectedEvent,
+}) {
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [city, setCity] = useState("");
+  const [venue, setVenue] = useState("");
+  const [hostedBy, setHostedBy] = useState("");
+  let [state, setState] = useState();
+  state = {
+    title,
+    date,
+    city,
+    venue,
+    hostedBy,
+  };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    let state = {
-      title: title,
-      date: date,
-      city: city,
-      venue: venue,
-      hostedBy: hostedBy,
-    };
     createEvent(state);
   };
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-  const handleDateChange = (event) => {
-    setDate(event.target.value);
-  };
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
-  };
-  const handleVenueChange = (event) => {
-    setVenue(event.target.value);
-  };
-  const handleHostedByChange = (event) => {
-    setHostedBy(event.target.value);
-  };
   return (
     <Segment>
       <Form onSubmit={handleFormSubmit}>
@@ -43,7 +33,7 @@ export default function EventForm({ cancelIsOpenForm, createEvent }) {
           <label>Event Title</label>
           <input
             name="title"
-            onChange={handleTitleChange}
+            onChange={(event) => setTitle(event.target.value)}
             value={title}
             type="text"
             placeholder="Event Title"
@@ -52,7 +42,8 @@ export default function EventForm({ cancelIsOpenForm, createEvent }) {
         <Form.Field>
           <label>Event Date</label>
           <input
-            onChange={handleDateChange}
+            name="date"
+            onChange={(event) => setDate(event.target.value)}
             value={date}
             type="date"
             placeholder="Event Date"
@@ -61,7 +52,8 @@ export default function EventForm({ cancelIsOpenForm, createEvent }) {
         <Form.Field>
           <label>City</label>
           <input
-            onChange={handleCityChange}
+            name="city"
+            onChange={(event) => setCity(event.target.value)}
             value={city}
             placeholder="City event is taking place"
           />
@@ -69,7 +61,8 @@ export default function EventForm({ cancelIsOpenForm, createEvent }) {
         <Form.Field>
           <label>Venue</label>
           <input
-            onChange={handleVenueChange}
+            name="venue"
+            onChange={(event) => setVenue(event.target.value)}
             value={venue}
             placeholder="Enter the Venue of te event"
           />
@@ -77,7 +70,8 @@ export default function EventForm({ cancelIsOpenForm, createEvent }) {
         <Form.Field>
           <label>Hosted by</label>
           <input
-            onChange={handleHostedByChange}
+            name="hostedBy"
+            onChange={(event) => setHostedBy(event.target.value)}
             value={hostedBy}
             placeholder="Enter the name of person hosting"
           />

@@ -83,7 +83,6 @@ export default function EventDashboard() {
   const handleSelectEvent = (evt, event) => {
     setSelectEvent(event);
     setIsOpen(true);
-    console.log(evt);
     console.log(event);
   };
 
@@ -101,6 +100,7 @@ export default function EventDashboard() {
           />
           {isOpen && (
             <EventForm
+              key={selectedEvent ? selectedEvent.id : 0}
               createEvent={handleCreateEvent}
               cancelIsOpenForm={handleFormCancel}
               selectedEvent={selectedEvent}
