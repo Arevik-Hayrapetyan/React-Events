@@ -6,24 +6,33 @@ export default function EventForm({
   cancelIsOpenForm,
   createEvent,
   selectedEvent,
+  updateEvent,
 }) {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [city, setCity] = useState("");
-  const [venue, setVenue] = useState("");
-  const [hostedBy, setHostedBy] = useState("");
-  let [state, setState] = useState();
-  state = {
-    title,
-    date,
-    city,
-    venue,
-    hostedBy,
+  let [state, setState] = useState({
+    title: "",
+    date: "",
+    city: "",
+    venue: "",
+    hostedBy: "",
+  });
+
+  // if (selectedEvent !== null) {
+  //   state = selectedEvent;
+  // }
+  const handleChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    createEvent(state);
+    if (state.id) {
+      updateEvent(state);
+    } else {
+      createEvent(state);
+    }
   };
 
   return (
@@ -33,8 +42,8 @@ export default function EventForm({
           <label>Event Title</label>
           <input
             name="title"
-            onChange={(event) => setTitle(event.target.value)}
-            value={title}
+            onChange={handleChange}
+            value={state.title}
             type="text"
             placeholder="Event Title"
           />
@@ -43,8 +52,8 @@ export default function EventForm({
           <label>Event Date</label>
           <input
             name="date"
-            onChange={(event) => setDate(event.target.value)}
-            value={date}
+            onChange={handleChange}
+            value={state.date}
             type="date"
             placeholder="Event Date"
           ></input>
@@ -53,8 +62,8 @@ export default function EventForm({
           <label>City</label>
           <input
             name="city"
-            onChange={(event) => setCity(event.target.value)}
-            value={city}
+            onChange={handleChange}
+            value={state.city}
             placeholder="City event is taking place"
           />
         </Form.Field>
@@ -62,8 +71,8 @@ export default function EventForm({
           <label>Venue</label>
           <input
             name="venue"
-            onChange={(event) => setVenue(event.target.value)}
-            value={venue}
+            onChange={handleChange}
+            value={state.venue}
             placeholder="Enter the Venue of te event"
           />
         </Form.Field>
@@ -71,8 +80,8 @@ export default function EventForm({
           <label>Hosted by</label>
           <input
             name="hostedBy"
-            onChange={(event) => setHostedBy(event.target.value)}
-            value={hostedBy}
+            onChange={handleChange}
+            value={state.hostedBy}
             placeholder="Enter the name of person hosting"
           />
         </Form.Field>

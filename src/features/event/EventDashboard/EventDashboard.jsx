@@ -83,7 +83,20 @@ export default function EventDashboard() {
   const handleSelectEvent = (evt, event) => {
     setSelectEvent(event);
     setIsOpen(true);
-    console.log(event);
+  };
+
+  const handleUpdateEvent = (updatedEvent) => {
+    setState(({ state }) => ({
+      state: state.map((event) => {
+        if (event.id === updatedEvent.id) {
+          return { ...updatedEvent };
+        } else {
+          return event;
+        }
+      }),
+    }));
+    setIsOpen(false);
+    setSelectEvent(null);
   };
 
   return (
@@ -101,6 +114,7 @@ export default function EventDashboard() {
           {isOpen && (
             <EventForm
               key={selectedEvent ? selectedEvent.id : 0}
+              updateEvent={handleUpdateEvent}
               createEvent={handleCreateEvent}
               cancelIsOpenForm={handleFormCancel}
               selectedEvent={selectedEvent}
