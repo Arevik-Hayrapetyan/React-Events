@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function EventForm({
   cancelIsOpenForm,
@@ -8,17 +8,18 @@ export default function EventForm({
   selectedEvent,
   updateEvent,
 }) {
-  let [state, setState] = useState({
-    title: "",
-    date: "",
-    city: "",
-    venue: "",
-    hostedBy: "",
-  });
+  let [state, setState] = useState(
+    selectedEvent
+      ? { ...selectedEvent }
+      : {
+          title: "",
+          date: "",
+          city: "",
+          venue: "",
+          hostedBy: "",
+        }
+  );
 
-  // if (selectedEvent !== null) {
-  //   state = selectedEvent;
-  // }
   const handleChange = (event) => {
     setState({
       ...state,
@@ -87,7 +88,11 @@ export default function EventForm({
         </Form.Field>
         <Button positive type="submit" content="Submit" />
 
-        <Button onClick={cancelIsOpenForm} type="button" content="Cancel" />
+        <Button
+          onClick={() => cancelIsOpenForm()}
+          type="button"
+          content="Cancel"
+        />
       </Form>
     </Segment>
   );

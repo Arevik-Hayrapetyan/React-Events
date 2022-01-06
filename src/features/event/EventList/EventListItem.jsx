@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Icon, Item, List, Segment } from "semantic-ui-react";
 import EventListAttendee from "./EventListAttendee";
 
-export default function EventListItem({ event, selectEvent }) {
+export default function EventListItem({ event, selectEvent, deleteEvent }) {
   return (
     <Segment.Group>
       <Segment>
@@ -37,7 +37,14 @@ export default function EventListItem({ event, selectEvent }) {
       <Segment clearing>
         <span>{event.description}</span>
         <Button
-          onClick={(evt) => selectEvent(evt, event)}
+          onClick={() => deleteEvent(event.id)}
+          as="a"
+          color="red"
+          floated="right"
+          content="Delete"
+        ></Button>
+        <Button
+          onClick={() => selectEvent(event)}
           as="a"
           color="teal"
           floated="right"

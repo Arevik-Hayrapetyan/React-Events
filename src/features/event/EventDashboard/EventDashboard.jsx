@@ -75,35 +75,44 @@ export default function EventDashboard() {
 
   const handleCreateEvent = (newEvent) => {
     newEvent.id = cuid();
-    newEvent.hostPhotoURL = "/assets/user.png";
+    newEvent.hostPhotoURL = "../../assets/user.png";
     setState([...state, newEvent]);
     setIsOpen(false);
   };
 
-  const handleSelectEvent = (evt, event) => {
+  const handleSelectEvent = (event) => {
     setSelectEvent(event);
     setIsOpen(true);
   };
 
   const handleUpdateEvent = (updatedEvent) => {
-    setState(({ state }) => ({
-      state: state.map((event) => {
-        if (event.id === updatedEvent.id) {
-          return { ...updatedEvent };
-        } else {
-          return event;
-        }
-      }),
-    }));
+    let events = state.map((event) => {
+      if (event.id === updatedEvent.id) {
+        return { ...updatedEvent };
+      } else {
+        return event;
+      }
+    });
+
+    setState(events);
     setIsOpen(false);
     setSelectEvent(null);
+  };
+
+  const handleDeleteEvent = (id) => {
+    let events = state.filter((event) => event.id !== id);
+    setState(events);
   };
 
   return (
     <div>
       <Grid>
         <Grid.Column width={10}>
-          <EventList events={state} selectEvent={handleSelectEvent} />
+          <EventList
+            events={state}
+            selectEvent={handleSelectEvent}
+            deleteEvent={handleDeleteEvent}
+          />
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
