@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+// import { withRouter } from "react-router";
 // import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Container, Menu } from "semantic-ui-react";
 import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
 
-export default function NavBar({ history }) {
-  // let history = useHistory();
+function NavBar() {
+  let history = useNavigate();
   const [authenticated, setAuthenticated] = useState(true);
 
   function handleSignIn() {
@@ -15,7 +17,7 @@ export default function NavBar({ history }) {
   function handleSignOut() {
     console.log("hi");
     setAuthenticated(true);
-    history.push("/");
+    history("/");
   }
   return (
     <Menu inverted fixed="top">
@@ -45,3 +47,4 @@ export default function NavBar({ history }) {
     </Menu>
   );
 }
+export default NavBar;
