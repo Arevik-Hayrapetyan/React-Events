@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { Container } from "semantic-ui-react";
 import "./App.css";
@@ -19,7 +19,7 @@ function App() {
       <NavBar />
       <Container className="main">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route exact path="/" element={<HomePage />} />
           <Route path="/events" element={<EventDashboard />} />
           <Route path="/events/:id" element={<EventDetailedPage />} />
           <Route path="/people" element={<PeopleDashboard />} />
