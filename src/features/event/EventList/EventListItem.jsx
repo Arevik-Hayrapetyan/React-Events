@@ -12,7 +12,7 @@ export default function EventListItem({ event, selectEvent, deleteEvent }) {
             <Item.Content>
               <Item.Header as="a">{event.title}</Item.Header>
               <Item.Description>
-                Hosted by <a>{event.hostedBy}</a>
+                Hosted by <div>{event.hostedBy}</div>
               </Item.Description>
             </Item.Content>
           </Item>
